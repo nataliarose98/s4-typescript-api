@@ -10,6 +10,13 @@ app.innerHTML = `
       <div class="card" role="region" aria-label="card-title">
         <h1 id="card-title" class="card-title">Ready to laugh?<span aria-hidden="true">🤣</span></h1>
         <p id="joke-container" class="card-joke" aria-live="polite">Loading joke...</p>
+
+        <div id="score-buttons">
+          <button class="score-btn" data-score="1">1</button>
+          <button class="score-btn" data-score="2">2</button>
+          <button class="score-btn" data-score="3">3</button>
+        </div>
+
         <button id="next-joke" class="btn">Next joke</button>
       </div>
     </div>
@@ -26,6 +33,11 @@ async function fetchJoke(): Promise<string> {
 }
 
 async function showJoke() {
+  if(jokeContainer.textContent && jokeContainer.textContent !== 'Loading joke...'){
+    saveJoke(jokeContainer.textContent)
+  }
+
+  
   const joke = await fetchJoke()
   jokeContainer.textContent = joke
   console.log(joke)
@@ -34,3 +46,33 @@ async function showJoke() {
 showJoke()
 
 nextJokeBtn.addEventListener('click', showJoke)
+
+//Exercise 2 
+
+type JokeReport = {
+  joke: string;
+  score: number;
+  date: string;
+}
+
+const reportJokes: JokeReport[] = [];
+
+const scoreButtons = document.querySelectorAll<HTMLAnchorElement>('.score-btn')
+let currentScore: number | null = null;
+
+function saveJoke(joke: string){
+  const report: JokeReport = {
+    joke,
+    score: currentScore ?? 0,
+    date: new Date().toISOString()
+  }
+  reportJokes.push(report)
+  console.log(reportJokes)
+}
+
+scoreButtons.forEach(button => {
+  button.addEventListener('click', () =>{
+    currentScore = Number(button.dataset.score)
+    console.log('Selected score', currentScore)
+  })
+})
