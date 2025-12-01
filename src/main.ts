@@ -3,10 +3,16 @@ import "./style.css";
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
 app.innerHTML = `
-  <div>
-    <h1>Jokes App</h1>
-    <div id="joke-container"></div>
-    <button id="next-joke">Next Joke</button>
+  <div class="page-bg">
+    <div class="top-left">Today: partly cloudy</div>
+
+    <div class="center-wrap">
+      <div class="card" role="region" aria-label="card-title">
+        <h1 id="card-title" class="card-title">Ready to laugh?<span aria-hidden="true">🤣</span></h1>
+        <p id="joke-container" class="card-joke" aria-live="polite">Loading joke...</p>
+        <button id="next-joke" class="btn">Next joke</button>
+      </div>
+    </div>
   </div>
 `;
 

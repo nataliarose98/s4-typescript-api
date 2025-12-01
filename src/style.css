@@ -1,96 +1,123 @@
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --bg-start: #fa87b0;  
+  --bg-end:   #f4eb8b;  
+  --accent-pink: #f8077c;   
+  --accent-yellow: #ffd14b;
+  --card-bg: #ffffff;
+  --text: #262626;
+  --muted: #6b6b6b;
+  --radius: 16px;
+  --max-width: 880px;
+  --shadow: 0 18px 40px rgba(38,38,38,0.08);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  max-width: 1100px;
+  padding: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.top-left {
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.85;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
+
+.center-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
 }
 
 .card {
-  padding: 2em;
+  width: min(var(--max-width), 94%);
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 44px 36px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  border: 6px solid transparent; 
+  overflow: visible;
 }
 
-.read-the-docs {
-  color: #888;
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: calc(var(--radius) + 6px);
+  background: linear-gradient(90deg, rgba(255,111,181,0.12), rgba(255,209,75,0.12));
+  z-index: -1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+
+.card-title {
+  font-size: 2rem; 
+  margin-bottom: 18px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.card-joke {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 0 auto 26px;
+  line-height: 1.7;
+  max-width: 720px;
+  padding: 0 8px;
+}
+
+.btn {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-yellow));
+  color: #1b1b1b;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  box-shadow: 0 10px 26px rgba(255,111,181,0.14);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(255,111,181,0.18); }
+.btn:active { transform: translateY(-1px); }
+
+.status {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+@media (max-width: 520px) {
+  .card { padding: 22px 18px; border-radius: 12px; }
+  .card-title { font-size: 1.25rem; }
+  .card-joke { font-size: 0.95rem; }
+  .top-left { left: 12px; top: 10px; font-size: 13px; }
 }
