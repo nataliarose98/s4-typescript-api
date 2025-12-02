@@ -4,7 +4,7 @@ const app = document.querySelector<HTMLDivElement>("#app")!;
 
 app.innerHTML = `
   <div class="page-bg">
-    <div class="top-left">Today: partly cloudy</div>
+    <div id="weather" class="top-left">Loading weather...</div>
 
     <div class="center-wrap">
       <div class="card" role="region" aria-label="card-title">
@@ -37,17 +37,17 @@ async function showJoke() {
     saveJoke(jokeContainer.textContent)
   }
 
-  
+
   const joke = await fetchJoke()
   jokeContainer.textContent = joke
   console.log(joke)
 }
 
-showJoke()
+
 
 nextJokeBtn.addEventListener('click', showJoke)
 
-//Exercise 2 
+//Exercise 3
 
 type JokeReport = {
   joke: string;
@@ -76,3 +76,31 @@ scoreButtons.forEach(button => {
     console.log('Selected score', currentScore)
   })
 })
+
+//exercise 4 
+
+const key = 'd074b52056b5ddcc5bcb4d159d7624c1'
+
+async function fetchWeather(city:string) {
+
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
+  )
+
+  const data = await response.json()
+  return data
+  
+}
+
+const weatherDiv = document.getElementById('weather')!;
+
+async function showWeather() {
+  const data = await fetchWeather('Barcelona')
+  const temp = data.main.temp
+  const description = data.weather[0].description
+  weatherDiv.textContent = `Today: ${description}, ${temp}°C`
+  
+}
+
+showWeather()
+showJoke();
