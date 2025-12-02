@@ -32,13 +32,39 @@ async function fetchJoke(): Promise<string> {
   return data.joke
 }
 
+//exercise 5
+
+async function fetchChuckNorrisJoke(): Promise<string> {
+  const response = await fetch("https://api.chucknorris.io/jokes/random");
+  const data = await response.json()
+  return data.value;
+  
+}
+
+async function fetchRandomJoke(): Promise<string> {
+  const useApi = Math.random() < 0.5
+
+  try {
+    if (useApi){
+      return await fetchJoke();
+    } else {
+      return await fetchChuckNorrisJoke();
+    }
+
+  } catch (error) {
+    console.error('Error fetching joke', error)
+    return 'Sorry, no jokes available right now'
+  }
+  
+}
+
 async function showJoke() {
   if(jokeContainer.textContent && jokeContainer.textContent !== 'Loading joke...'){
     saveJoke(jokeContainer.textContent)
   }
 
 
-  const joke = await fetchJoke()
+  const joke = await fetchRandomJoke()
   jokeContainer.textContent = joke
   console.log(joke)
 }
