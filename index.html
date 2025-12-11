@@ -1,12 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>s4-typescript-api</title>
+    <title>Joke App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="src/main.ts"></script>
+    <div id="app">
+      <div class="page-bg">
+        <div id="weather" class="top-left">⛅ Loading...</div>
+        <div class="center-wrap">
+          <div class="card">
+            <h1 class="card-title">Ready to laugh? 🤣</h1>
+            <p id="joke-container" class="card-joke">Loading...</p>
+            
+            <div id="score-buttons">
+              <button class="score-btn" data-score="1">1</button>
+              <button class="score-btn" data-score="2">2</button>
+              <button class="score-btn" data-score="3">3</button>
+            </div>
+            
+            <button id="next-joke" class="btn">Next joke</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
