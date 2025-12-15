@@ -8,19 +8,60 @@
   <body>
     <div id="app">
       <div class="page-bg">
-        <div id="weather" class="top-left">⛅ Loading...</div>
+        <div
+          id="weather-container"
+          class="absolute left-5 top-4 text-sm text-gray-800 opacity-85 flex items-center space-x-1"
+        >
+          <span id="weather-icon" class="text-2xl font-sans">☀️</span>
+          <span id="weather-text">Loading...</span>
+        </div>
+
         <div class="center-wrap">
-          <div class="card">
-            <h1 class="card-title">Ready to laugh? 🤣</h1>
-            <p id="joke-container" class="card-joke">Loading...</p>
-            
-            <div id="score-buttons">
-              <button class="score-btn" data-score="1">1</button>
-              <button class="score-btn" data-score="2">2</button>
-              <button class="score-btn" data-score="3">3</button>
+          <div
+            class="w-full max-w-2xl bg-white rounded-[3rem] p-10 shadow-2xl text-center relative border-6 border-transparent overflow-visible md:p-14 transform rotate-1 transition duration-300"
+          >
+            <h1
+              class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900"
+            >
+              Ready to laugh? 🤣
+            </h1>
+            <p
+              id="joke-container"
+              class="text-lg text-gray-800 mx-auto mb-12 leading-relaxed max-w-3xl px-2"
+            >
+              Loading...
+            </p>
+
+            <div
+              id="score-btn"
+              class="flex justify-center space-x-4 mt-6 mb-16"
+            >
+              <button
+                class="p-3 rounded-full bg-red-400 ... shadow-lg joke-score-btn"
+                data-score="1"
+              >
+                <span class="text-xl">😠</span>
+              </button>
+              <button
+                class="p-3 rounded-full bg-yellow-400 ... shadow-lg joke-score-btn"
+                data-score="2"
+              >
+                <span class="text-xl">😐</span>
+              </button>
+              <button
+                class="p-3 rounded-full bg-green-400 ... shadow-lg joke-score-btn"
+                data-score="3"
+              >
+                <span class="text-xl">😂</span>
+              </button>
             </div>
-            
-            <button id="next-joke" class="btn">Next joke</button>
+
+            <button
+              id="next-joke"
+              class="mt-12 inline-block py-3 px-6 rounded-xl text-gray-900 text-base font-semibold cursor-pointer shadow-md bg-linear-to-r from-pink-500 to-yellow-400 transition-all duration-150 ease-in-out hover:translate-y-[-3px] hover:shadow-lg active:translate-y-px"
+            >
+              Next joke
+            </button>
           </div>
         </div>
       </div>

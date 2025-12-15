@@ -6,12 +6,48 @@ import { addJokeToReport } from "./data/dataManager";
 const jokeContainer =
   document.querySelector<HTMLDivElement>("#joke-container")!;
 const nextJokeBtn = document.querySelector<HTMLButtonElement>("#next-joke")!;
-const weatherDiv = document.getElementById("weather")!;
-const scoreButtons = document.querySelectorAll<HTMLButtonElement>(".score-btn");
+const scoreButtons =
+  document.querySelectorAll<HTMLButtonElement>(".joke-score-btn");
+
+const weatherIconEl = document.querySelector<HTMLSpanElement>("#weather-icon")!;
+const weatherTextEl = document.querySelector<HTMLSpanElement>("#weather-text")!;
 
 let currentJokeText = "";
 let currentScore: number | null = null;
 
+function getWeatherEmoji(iconCode: string): string {
+  switch (iconCode) {
+    case "01d":
+    case "01n":
+      return "☀️";
+    case "02d":
+    case "02n":
+      return "🌤️";
+    case "03d":
+    case "03n":
+      return "☁️";
+    case "04d":
+    case "04n":
+      return " overcast";
+    case "09d":
+    case "09n":
+      return "🌧️";
+    case "10d":
+    case "10n":
+      return "☔";
+    case "11d":
+    case "11n":
+      return "⛈️";
+    case "13d":
+    case "13n":
+      return "❄️";
+    case "50d":
+    case "50n":
+      return "🌫️";
+    default:
+      return "🌡️";
+  }
+}
 
 async function getNextJoke() {
   return Math.random() < 0.5
@@ -24,8 +60,7 @@ async function showJoke() {
     addJokeToReport(currentJokeText, currentScore);
   }
 
-
-  currentScore = null
+  currentScore = null;
   jokeContainer.textContent = "Loading...";
 
   try {
@@ -40,15 +75,19 @@ async function showJoke() {
 async function loadWeather() {
   try {
     const data = await fetchWeather("Barcelona");
-    weatherDiv.textContent = `Barcelona: ${
-      data.weather[0].description
-    }, ${Math.round(data.main.temp)}°C`;
+
+    const temperature = Math.round(data.main.temp);
+    const description = data.weather[0].description;
+    const iconCode = data.weather[0].icon;
+    const emoji = getWeatherEmoji(iconCode);
+
+    weatherIconEl.textContent = emoji;
+    weatherTextEl.textContent = `Barcelona: ${description}, ${temperature}°C`;
   } catch (error) {
-    weatherDiv.textContent = "Weather unavailable";
+    weatherIconEl.textContent = "❌";
+    weatherTextEl.textContent = "Weather unavailable";
   }
 }
-
-
 
 nextJokeBtn.addEventListener("click", showJoke);
 
